@@ -20,7 +20,7 @@ Processingのサンプルまとめです。
 - 開発環境：Processing IDE
 
 <br>
-<img src="https://github.com/55Kaerukun/Processing/blob/master/images/processing_ide.png" width="700px">
+<img src="https://github.com/55Kaerukun/Processing/blob/master/images/processing_ide.png" width="500px">
 <br>
 
 ### 事例紹介
