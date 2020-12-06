@@ -35,11 +35,13 @@ http://www.aaronkoblin.com/project/flight-patterns/
 
 
 
-## まずは色々な図形を覚えて絵を描けるようになりましょう。
-<br>
+## まずは色々な図形を覚えて絵を描けるようになりましょう。<br>
+
 ### レッツお絵かき
+
 <br>
 チャレンジ1 ニコちゃん？描いてみましょう！
+
 <br>
 <img src="https://github.com/55Kaerukun/Processing/blob/master/images/yellowface.pmg" width="500px">
 
