@@ -43,7 +43,7 @@ http://www.aaronkoblin.com/project/flight-patterns/
 チャレンジ1 ニコちゃん？描いてみましょう！
 
 <br>
-<img src="https://github.com/55Kaerukun/Processing/blob/master/images/yellowface.pmg" width="500px">
+<img src="https://github.com/55Kaerukun/Processing/blob/master/images/yellowface.pmg" width="400px">
 
 ```
 
