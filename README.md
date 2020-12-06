@@ -23,17 +23,6 @@ Processingのサンプルまとめです。
 <img src="https://github.com/55Kaerukun/Processing/blob/master/images/processing_ide.png" width="500px">
 <br>
 
-### 事例紹介
-
-#### Flight Patterns
-Aaron Koblin <br>
-http://www.aaronkoblin.com/
-
-http://www.aaronkoblin.com/project/flight-patterns/
-
-[![Flight Patterns](http://img.youtube.com/vi/ystkKXzt9Wk/0.jpg)](http://www.youtube.com/watch?v=ystkKXzt9Wk)
-
-
 
 ## まずは色々な図形を覚えて絵を描けるようになりましょう。<br>
 
