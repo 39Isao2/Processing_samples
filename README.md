@@ -238,4 +238,324 @@ void draw(){
 問題！posYにして、上下運動に変更してみよう！<br><br>
 問題！丸を二個にして、クロスするアニメーションを作ろう。
 
-### 条件分岐(if文)は次回で詳しく！！
+### 条件分岐(if文)は次回登場
+if文と配列で大量バウンド <br>
+https://github.com/55Kaerukun/Processing/tree/master/if_statement
+
+
+
+# シーンの切り替え （keyPressed)
+
+キーボードの入力と関数を利用して、シーンを切り替える<br>
+
+<img src="https://raw.githubusercontent.com/55Kaerukun/Processing/master/images/change.png" width="600px">
+
+```
+
+// シーンを管理する変数
+int scene;
+
+void setup( ) {
+    size(600,600);
+    colorMode(HSB,360,100,100,100);
+    background(100,0,100);
+
+    // 四角形の描画起点を真ん中に
+    rectMode(CENTER);
+    strokeWeight(3);
+    
+    // 最初のシーン
+    scene = 0;
+}
+
+
+void draw() {
+  
+    background(100,0,100);
+    
+    if(scene == 1){
+      // 丸を描画
+      fill(90,100,100,100);
+      ellipse(width/2,height/2,200,200);
+    } else if(scene == 2){
+      // 四角を描画
+      fill(0,100,100,100);
+      rect(width/2,height/2,200,200);
+    } else if(scene == 3){
+      // 線を描画
+      line(0,0,width,height);
+      line(width,0,0,height);
+    }
+    
+}
+
+
+void keyPressed(){
+  
+    if(key == 'a'){
+    // aを押したら      
+      scene = 1; // シーンを1に変更  
+    } else if(key == 's'){
+    // sを押したら
+      scene = 2; // シーンを2に変更
+    } else if(key == 'd'){
+    // dを押したら
+      scene = 3; // シーンを3に変更
+    }
+}
+
+```
+
+
+# ノイズ
+
+参考
+https://qiita.com/takumi_tamacov/items/9d42d346dbf9d65745ba <br>
+processingにはrandom()関数と似たようなnoise()という関数がある。<br>
+noise関数は「パーリンノイズ」というアルゴリズムを利用している。<br>
+
+<img src="https://github.com/55Kaerukun/Processing/blob/master/images/noise.png" width="800px">
+
+<br>
+パーリンノイズの例<br>
+http://zellij.hatenablog.com/entry/20130507/p1
+<br>
+
+
+```
+// 引数がいくつでも、必ず結果は0.0 ~ 1.0の間の値が返される
+// 引数には増加する値入れる。
+noise();
+```
+
+
+```
+
+float step;
+float y;
+
+void setup(){
+  
+    size(400, 400);
+    step = 0;
+    background(255);
+  
+    for (int i = 0; i < width; i += 3) {
+      
+      
+      // ランダムを使った場合は連続性がない  
+      // y = random(height);
+      
+      //noise()の引数がいくつでも、必ず結果は0.0 ~ 1.0の間の値が返される
+      //0.0 ~ 1.0にheightを掛けているので、結果は0.0 ~ 400.0
+      y = noise(step) * height;  //ノイズを使ってy座標を設定
+      
+
+      line(i, 0, i, y);
+      
+      step += 0.1;   //ノイズの値を更新
+    }
+    
+}
+
+```
+
+ランダムだとこうなる<br>
+<img src="https://github.com/55Kaerukun/Processing/blob/master/images/random.png" width="800px">
+
+
+
+
+## ノイズウォーカー
+
+<img src="https://github.com/55Kaerukun/Processing/blob/master/images/randomwork.png" width="500px">
+
+```
+
+float stepX;
+float stepY;
+ 
+void setup(){
+  size(500, 500);
+  
+  background(255);
+  
+  stepX = random(100);
+  stepY = random(100);
+}
+ 
+void draw(){
+  
+  // 高速化させるためのfor
+  // for(int i =0; i<10; i++){
+  
+    float x = noise(stepX) * width;
+    float y = noise(stepY) * height;
+    
+    //float x = random(width);
+    //float y = random(height);
+    
+    stroke(0);
+    point(x, y);
+    
+    stepX += 0.01;
+    stepY += 0.01;
+  //}
+  
+}
+
+```
+
+## ノイズウォーカー複数ver
+
+```
+
+int NUM = 10;
+float[] stepX = new float[NUM];
+float[] stepY = new float[NUM];
+
+void setup(){
+  size(500, 500);
+  
+  background(0);
+  
+  for(int i=0; i<NUM; i++){
+      stepX[i] = random(300);
+      stepY[i] = random(300);  
+  }
+  blendMode(ADD);
+
+}
+ 
+void draw(){
+  
+  strokeWeight(1);
+  stroke(255,100);
+  
+  for(int i=0; i<NUM; i++){
+    float x = noise(stepX[i]) * width;
+    float y = noise(stepY[i]) * height;
+    point(x, y);
+    
+    stepX[i]+=0.01;
+    stepY[i]+=0.01;
+  }
+  
+}
+
+```
+
+## 球面座標
+
+### 球面座標の公式
+<img src="https://github.com/55Kaerukun/Processing/blob/master/images/kyuumen_shiki.png" width="600px"> 
+
+参考: <br>
+球面座標系(Wikipedia) https://ja.wikipedia.org/wiki/%E7%90%83%E9%9D%A2%E5%BA%A7%E6%A8%99%E7%B3%BB  <br>
+球を描く方法（球面座標系を使う） https://n2p5.hatenadiary.jp/entry/2018/03/30/172351  <br>
+http://www.isc.meiji.ac.jp/~re00079/HT.2020/20200525.html <br>
+
+
+
+<img src="https://github.com/55Kaerukun/Processing/blob/master/images/kyuumen2.png" width="400px"> 
+
+
+```
+int POINTS = 3000;
+int RADIUS = 300;
+float[] x = new float[POINTS];
+float[] y = new float[POINTS];
+float[] z = new float[POINTS];
+
+void setup() {
+  size(800, 800, P3D);
+  
+  stroke(0, 192, 255, 180);
+  strokeWeight(4);
+  
+  for(int i = 0; i<POINTS; i++){
+    // 球面上の座標をランダムで計算
+    float randTheta = radians(random(180));
+    float randPhi = radians(random(360));
+    x[i] = RADIUS * sin(randTheta) * cos(randPhi);
+    y[i] = RADIUS * sin(randTheta) * sin(randPhi);
+    z[i] = RADIUS * cos(randTheta);
+  }
+  
+}
+
+void draw() {
+
+  background(0);
+
+  // 中心点を移動
+  translate(width/2, height/2, 0);
+  rotateY(frameCount*0.005);
+  rotateZ(frameCount*0.005);
+  
+  for(int i = 0; i<POINTS; i++){
+    point(x[i],y[i],z[i]);
+  }
+}
+
+```
+
+
+
+## 球面をノイズで星屑風にアレンジ
+
+
+<img src="https://github.com/55Kaerukun/Processing/blob/master/images/hoshikuzu.png" width="400px"> 
+
+```
+
+int POINTS = 5000;
+int RADIUS = 500;
+float[] x = new float[POINTS];
+float[] y = new float[POINTS];
+float[] z = new float[POINTS];
+float step;
+
+void setup() {
+  size(800, 800, P3D);
+  blendMode(ADD);
+  
+  stroke(0, 192, 255, 120);
+  strokeWeight(4);
+  step = 0;
+  
+  for(int i = 0; i<POINTS; i++){
+    // 球面上の座標をランダムで計算
+    float radianTheta = radians(random(180));
+    float radianPhi = radians(random(360));
+    x[i] = RADIUS * sin(radianTheta) * cos(radianPhi);
+    y[i] = RADIUS * sin(radianTheta) * sin(radianPhi);
+    z[i] = RADIUS * cos(radianTheta);
+    
+    x[i] = noise(step) * x[i];
+    y[i] = noise(step) * y[i];
+    z[i] = noise(step) * z[i];
+    step+=0.5;
+  }
+ 
+  
+}
+
+void draw() {
+
+  background(0);
+
+  // 中心点を移動
+  translate(width/2, height/2, 0);
+  rotateY(frameCount*0.005);
+  rotateZ(frameCount*0.005);
+  
+  for(int i = 0; i<POINTS; i++){
+    point(x[i],y[i],z[i]);  
+  }
+  
+}
+
+```
+
+
